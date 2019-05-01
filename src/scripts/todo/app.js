@@ -8,6 +8,7 @@ function loadEventListeners() {
     form.addEventListener('submit', addTask);
     taskList.addEventListener('click', removeTask);
     clearBtn.addEventListener('click', clearTasks);
+    filter.addEventListener('keyup', filterTasks);
 }
 loadEventListeners();
 
@@ -34,4 +35,12 @@ function clearTasks(e) {
     while (taskList.firstChild) {
         taskList.removeChild(taskList.firstChild);
     }
+}
+
+function filterTasks(e) {
+    const text = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.collection-item').forEach(function (task) {
+        const item = task.firstChild.textContent;
+        item.toLowerCase().indexOf(text) != -1 ? task.style.display = "block" : task.style.display = "none";
+    })
 }
